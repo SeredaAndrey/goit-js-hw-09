@@ -2,119 +2,9 @@ import flatpickr from 'flatpickr';
 import Notiflix from 'notiflix';
 import 'flatpickr/dist/flatpickr.min.css';
 
-// let time = null;
 let intervalID = null;
+let time = null;
 
-// выполнение задание через классы
-
-const refs = {
-  startButton: document.querySelector('[data-start]'),
-  stopButton: document.querySelector('[data-stop]'),
-
-  fieldDay: document.querySelector('[data-days]'),
-  fieldHours: document.querySelector('[data-hours]'),
-  fieldMinutes: document.querySelector('[data-minutes]'),
-  fieldSeccons: document.querySelector('[data-seconds]'),
-
-  fieldPicker: document.querySelector('[datetime-picker]'),
-};
-
-class CountdownTimer {
-  constructor(
-    {
-      startButton,
-      stopButton,
-      fieldDay,
-      fieldHours,
-      fieldMinutes,
-      fieldSeccons,
-      fieldPicker,
-    },
-    intervalID
-  ) {
-    this.startButton = startButton;
-    this.stopButton = stopButton;
-    this.fieldDay = fieldDay;
-    this.fieldHours = fieldHours;
-    this.fieldMinutes = fieldMinutes;
-    this.fieldSeccons = fieldSeccons;
-    this.fieldPicker = fieldPicker;
-    this.intervalID = intervalID;
-
-    // this.currentTime = null;
-    this.currentDate = null;
-
-    this.options = {
-      enableTime: true,
-      time_24hr: true,
-      defaultDate: new Date(),
-      minuteIncrement: 1,
-      onClose(selectedDates) {
-        this.currentDate = selectedDates[0];
-      },
-    };
-
-    this.init();
-  }
-  init() {
-    this.startButton.setAttribute('disabled', 'disabled');
-    this.stopButton.setAttribute('disabled', 'disabled');
-
-    this.fieldPicker.addEventListener('close', () => {
-      console.log('evervev');
-    });
-
-    flatpickr('#datetime-picker', this.options);
-    // console.log(this.currentDate);
-  }
-  onClosePickr() {
-    console.log('wecbwecbw');
-    const nowDate = new Date();
-    console.log(nowDate);
-    this.currentTime = this.currentDate.getTime() - nowDate.getTime();
-    if (currentTime < 0) {
-      this.allertWindow();
-      return;
-    }
-    this.startButton.removeAttribute('disabled');
-    // writeText();
-    this.startButton.addEventListener('click', startTimer);
-  }
-
-  allertWindow() {
-    Notiflix.Report.failure(
-      'Please choose a data in the future',
-      '',
-      'continue',
-      function cb() {
-        return;
-      },
-      {
-        width: '360px',
-        svgSize: '120px',
-      }
-    );
-  }
-  successWindow() {
-    Notiflix.Report.success(
-      'Time is up, continue?',
-      '',
-      'continue',
-      function cb() {
-        return;
-      },
-      {
-        width: '360px',
-        svgSize: '120px',
-      }
-    );
-  }
-}
-
-new CountdownTimer(refs);
-
-/*
-выполнение задания через функции
 const refs = {
   startButton: document.querySelector('[data-start]'),
   stopButton: document.querySelector('[data-stop]'),
@@ -122,10 +12,7 @@ const refs = {
   fieldHours: document.querySelector('[data-hours]'),
   fieldMinutes: document.querySelector('[data-minutes]'),
   fieldSeccons: document.querySelector('[data-seconds]'),
-  
 };
-
-
 
 const options = {
   enableTime: true,
@@ -224,4 +111,3 @@ function successWindow() {
     }
   );
 }
-*/
